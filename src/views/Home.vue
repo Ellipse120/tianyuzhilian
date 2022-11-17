@@ -1,5 +1,7 @@
 <script setup>
-import Sketleton from '@/components/Sketleton.vue'
+import { useResume } from '@/composable'
+
+const { resumes } = useResume()
 </script>
 
 <template>
@@ -120,53 +122,14 @@ import Sketleton from '@/components/Sketleton.vue'
           <div class="flex-1">学历</div>
         </div>
 
-        <div class="collapse collapse-arrow">
+        <div class="collapse collapse-arrow" v-for="t in resumes" :key="t.type">
           <input type="checkbox" class="peer" /> 
           <div class="collapse-title text-lg bg-base-200 text-black peer-checked:bg-base-200 peer-checked:text-blue-800 transition-all duration-500 border-b flex pr-0">
-            <div class="flex-1">计算机视觉工程师</div>
-            <div class="flex-1">硕士及以上</div>
+            <div class="flex-1">{{ t.type }}</div>
+            <div class="flex-1">{{ t.xueli }}</div>
           </div>
           <div class="collapse-content text-xs text-left bg-white text-black"> 
-            <div class="p-2">
-              <p>岗位要求：</p>
-              <p>1、负责网络通信图纸识别算法研究、开发与部署</p>
-              <p>2、负责图像分析分割、面部关键点识别等算法设计、实现及调试部署</p>
-
-              <br>
-
-              <p>任职资格：</p>
-              <p>1、重点院校硕士及以上学历</p>
-              <p>2、三年及以上相关领域工作经验，能力优秀的应届生也可以考虑</p>
-              <p>3、有人体姿态识别、图像分割、人脸关键点识别等计算机视觉算法开发经验</p>
-              <p>4、精通C/C++，Python等编程语言</p>
-              <p>5、熟悉OpenCV、Halcon、Tensorflow、PyTorch</p>
-              <p>6、有图像识别应用开发项目经验者优先</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="collapse collapse-arrow">
-          <input type="checkbox" class="peer" /> 
-          <div class="collapse-title text-lg bg-base-200 text-black peer-checked:bg-base-200 peer-checked:text-blue-800 transition-all duration-500 border-b flex pr-0">
-            <div class="flex-1">计算机视觉工程师2</div>
-            <div class="flex-1">硕士及以上</div>
-          </div>
-          <div class="collapse-content text-xs text-left bg-white text-black"> 
-            <div class="p-2">
-              <p>岗位要求：</p>
-              <p>1、负责网络通信图纸识别算法研究、开发与部署</p>
-              <p>2、负责图像分析分割、面部关键点识别等算法设计、实现及调试部署</p>
-
-              <br>
-
-              <p>任职资格：</p>
-              <p>1、重点院校硕士及以上学历</p>
-              <p>2、三年及以上相关领域工作经验，能力优秀的应届生也可以考虑</p>
-              <p>3、有人体姿态识别、图像分割、人脸关键点识别等计算机视觉算法开发经验</p>
-              <p>4、精通C/C++，Python等编程语言</p>
-              <p>5、熟悉OpenCV、Halcon、Tensorflow、PyTorch</p>
-              <p>6、有图像识别应用开发项目经验者优先</p>
-            </div>
+            <div class="p-2" v-html="t.jd"></div>
           </div>
         </div>
       </div>

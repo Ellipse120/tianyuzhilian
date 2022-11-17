@@ -117,7 +117,7 @@ const { resumes } = useResume()
       </div>
 
       <div class="p-4">
-        <div class="flex bg-blue-800 text-white">
+        <div class="flex bg-blue-800 text-white p-4">
           <div class="flex-1">招聘岗位</div>
           <div class="flex-1">学历</div>
         </div>

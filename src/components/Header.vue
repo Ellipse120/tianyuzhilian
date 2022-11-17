@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import Logo from '@/assets/vue.svg'
 
 const router = useRouter()
-const menus = computed(() => router.getRoutes()?.filter(r => r.meta?.title))
+const menus = computed(() => router.getRoutes()?.filter(r => r.meta?.title && !r.meta?.hidden))
 const title = $ref('天域智联')
 </script>
 

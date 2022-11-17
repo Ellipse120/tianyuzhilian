@@ -4,6 +4,7 @@ import Layout from "@/layouts/index.vue";
 import Home from "@/views/Home.vue";
 import AIDesign from "@/views/AIDesign.vue";
 import DynamicConsultation from "@/views/DynamicConsultation.vue";
+import Detail from "@/views/Detail.vue";
 import JoinUs from "@/views/JoinUs.vue";
 import AboutUs from "@/views/AboutUs.vue";
 import NotFound from "@/views/NotFound.vue";
@@ -28,12 +29,30 @@ const routes = [
   },
 
   {
-    path: "/dynamic-consultation",
-    name: "DynamicConsultation",
-    component: DynamicConsultation,
+    path: '/dynamic-consultation',
     meta: {
-      title: "动态咨询",
+      title: "动态资讯",
     },
+    children: [
+      {
+        path: '',
+        name: 'DynamicConsultation',
+        component: DynamicConsultation,
+        meta: {
+          title: "动态资讯",
+        }
+      },
+  
+      {
+        path: "/dynamic-consultation/detail",
+        name: "DynamicConsultationDetail",
+        component: Detail,
+        meta: {
+          title: "动态资讯详情",
+          hidden: true,
+        },
+      },
+    ],
   },
 
   {
@@ -53,7 +72,7 @@ const routes = [
     component: AboutUs,
     meta: {
       title: "关于我们",
-    }
+    },
   },
 
   {

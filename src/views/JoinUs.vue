@@ -21,23 +21,23 @@ const { resumes } = useResume()
       </div>
     </div>
 
-    <div class="divider text-4xl text-blue-800 font-bold tracking-wider px-8 py-12">让你轻松设计网络通信方案</div>
+    <div class="divider text-2xl lg:text-3xl text-blue-800 font-bold tracking-wider p-2 lg:px-8 lg:py-12">让你轻松设计网络通信方案</div>
 
     <div class="text-2xl p-8 m-8 mt-0 pt-0 rounded-lg  bg-base-200 text-center text-blue-800">
-      <div class="text-3xl flex items-center justify-center">
-        <div class="bg-clip-border bg-blue-800 text-white rounded-b-3xl p-4 w-1/2">
+      <div class="text-2xl lg:text-3xl flex items-center justify-center">
+        <div class="bg-clip-border bg-blue-800 text-white rounded-b-3xl p-4 lg:w-1/2">
           招贤纳士
         </div>
       </div>
 
       <div class="text-black">
         <div
-          class="grid grid-cols-2 w-full my-12"
+          class="grid lg:grid-cols-2 sm:grid-cols-1 sm:grid-rows-2 w-full my-12 sm:my-6"
           v-for="t in resumes"
           :key="t.type"
         >
-          <div class="flex flex-col items-center justify-center border-r px-16 mx-16">
-            <div class="flex items-center justify-start w-full mb-8">
+          <div class="flex flex-col items-center justify-center lg:border-r lg:px-16 lg:mx-16">
+            <div class="flex items-center justify-start w-full mb-8 text-center">
               <UserIcon class="mr-4" />
               <div>{{ t.type }}</div>
             </div>
@@ -53,15 +53,15 @@ const { resumes } = useResume()
     </div>
 
     <div class="text-2xl p-8 m-8 mt-0 pt-0 rounded-lg  bg-base-200 text-center text-blue-800">
-      <div class="text-3xl flex items-center justify-center">
-        <div class="bg-clip-border bg-blue-800 text-white rounded-b-3xl p-4 w-1/2">
+      <div class="text-2xl lg:text-3xl flex items-center justify-center">
+        <div class="bg-clip-border bg-blue-800 text-white rounded-b-3xl p-4 lg:w-1/2">
           联系我们
         </div>
       </div>
 
-      <div class="grid grid-cols-2 grid-rows-[1fr,100px] place-items-center gap-8 mt-8">
+      <div class="grid lg:grid-cols-2 grid-rows-[1fr,72px,72px,72px] lg:grid-rows-[1fr,100px] place-items-center gap-8 mt-8">
         <div class="w-full h-full">
-          <figure><img :src="Map" class="w-full h-[300px]" alt="Map" /></figure>
+          <figure><img :src="Map" class="w-full h-[260px] lg:h-[300px]" alt="Map" /></figure>
         </div>
 
         <div class="h-full text-left w-full text-black flex items-start justify-center flex-col">
@@ -71,7 +71,7 @@ const { resumes } = useResume()
           <div class="text-xs">我们将提供最好的服务给你</div>
         </div>
 
-        <div class="text-right w-full flex flex-col items-end justify-end  text-black">
+        <div class="text-left lg:text-right w-full flex flex-col items-start lg:items-end justify-end text-black">
           <Location class="h-[1.5rem] w-[1.5rem] mb-2" />
 
           <div class="text-xs">注册地址</div>
@@ -87,6 +87,6 @@ const { resumes } = useResume()
         </div>
       </div>
     </div>
-    
+
   </div>
 </template>

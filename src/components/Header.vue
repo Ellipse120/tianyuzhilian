@@ -22,7 +22,7 @@ const title = $ref('天域智联')
     </div>
   </div> -->
 
-  <div class="navbar bg-black text-white">
+  <div class="navbar bg-stone-900/95 text-white sticky top-0">
   <div class="navbar-start">
     <div class="dropdown">
       <label tabindex="0" class="btn btn-ghost lg:hidden">
@@ -38,9 +38,9 @@ const title = $ref('天域智联')
     <img :src="Logo" alt="logo" class="h-5" />
     <a class="btn btn-ghost normal-case text-xl">{{ title }}</a>
   </div>
-  
+
   <div class="navbar-end hidden lg:flex">
-    <ul class="menu menu-horizontal p-0">
+    <ul class="menu menu-horizontal p-0 z-2">
       <router-link v-for="r in menus" :to="r.path">
         <li><a>{{ r.meta.title }}</a></li>
       </router-link>

@@ -1,19 +1,27 @@
 <script setup>
+import { marked } from 'marked'
 import { useRouteQuery } from '@vueuse/router'
 
-const id = useRouteQuery('id')
+const id = $(useRouteQuery('id'))
 let model = $ref(null)
 
-const getDetail = (id) => {
-  model = {
-    id: id,
-    title: 'Title',
-    content: 'LoremQuis reprehenderit sit nulla qui incididunt voluptate'
-  }
+const getDetail = async (v) => {
+   const res = await fetch(`http://localhost:1337/api/items/${v}`, {
+    headers: {
+      Authorization: `Bearer f8f6798061963d7672baa9b45927b991f07b6376ad715483c0fe3816f08f6d612ba09c6122d4381d165085a3b8546bb21884c9a4e0c047c1a426697890e8d5195b804e47f06c948c6b8a621065359a6608e596a4660338a030600264f89525958a40997815a4ee2d3ba16a4f892e5f5aa95cb980f8d3760011a557a673f291a2`
+    },
+   })
+  const d = await res.json()
+  console.log(d.data);
+  model = d.data
 }
 
 id && getDetail(id)
 
+const renderContent = (v) => {
+  if (!v) return ''
+  return marked(v)
+}
 </script>
 
 <template>
@@ -32,18 +40,18 @@ id && getDetail(id)
       网络通信方案轻松设计
     </div>
 
-    <div class="grid grid-cols-2 grid-rows-[70px,1fr] gap-4  text-2xl p-8 m-8 mt-0 pt-0 rounded-lg  bg-base-200 text-center text-blue-800">
-      <div class="col-span-2 text-3xl flex items-center justify-center">
+    <div class="grid grid-cols-1 grid-rows-[70px,1fr] gap-4  text-2xl p-8 m-8 mt-0 pt-0 rounded-lg  bg-base-200 text-center text-blue-800">
+      <div class="text-3xl flex flex-col items-center justify-center">
         <div class="bg-clip-border bg-blue-800 text-white rounded-b-3xl p-4 w-1/2">
-          {{ model?.title }}
+          {{ model?.attributes?.Title }}
         </div>
 
-        
+        <div>
+          {{ model?.attributes?.Description }}
+        </div>
       </div>
 
-      <div>
-        {{ model.content }}
-      </div>
+      <div v-html="renderContent(model?.attributes?.Content)" />
     </div>
   </div>
 </template>

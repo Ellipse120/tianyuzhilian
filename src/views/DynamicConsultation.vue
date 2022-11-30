@@ -1,15 +1,25 @@
 <script setup>
-import { useRouter } from 'vue-router'
+import { marked } from 'marked'
 
-const router = useRouter()
+import Layout from '@/layouts/index.vue'
 
-const toDetail = (item) => {
-  router.push({
-    name: 'DynamicConsultationDetail',
-    query: {
-      id: item
-    }
+let list = $ref([])
+
+const getData = async () => {
+  const res = await fetch('http://localhost:1337/api/items?populate=Cover', {
+    headers: {
+      Authorization: `Bearer f8f6798061963d7672baa9b45927b991f07b6376ad715483c0fe3816f08f6d612ba09c6122d4381d165085a3b8546bb21884c9a4e0c047c1a426697890e8d5195b804e47f06c948c6b8a621065359a6608e596a4660338a030600264f89525958a40997815a4ee2d3ba16a4f892e5f5aa95cb980f8d3760011a557a673f291a2`
+    },
   })
+  const d = await res.json()
+  console.log(d);
+  list = d.data
+}
+
+getData()
+
+const renderContent = (v) => {
+  return marked(v)
 }
 </script>
 
@@ -59,13 +69,13 @@ const toDetail = (item) => {
 
     <div class="px-8 py-12">
       <router-link
-        class="flex items-center justify-around  bg-base-100 hover:bg-base-300 shadow-xl p-2 mb-2 cursor-pointer" 
-        v-for="item in 10"
-        :key="item"
+        class="flex items-center justify-around bg-base-100 hover:bg-base-300 shadow-xl p-2 mb-2 cursor-pointer" 
+        v-for="(t,index) in list"
+        :key="index"
         tag="div"
-        :to="`/dynamic-consultation/detail?id=${item}`"
+        :to="`/dynamic-consultation/detail?id=${t.id}`"
       >
-        <figure><img src="https://placeimg.com/150/150/arch" alt="Album"/></figure>
+        <figure><img :src="'http://localhost:1337' + t.attributes.Cover.data.attributes.url" alt="Album" class="w-80" /></figure>
         
         <div class="mx-2">
           <span class="text-sm">11/17</span>
@@ -76,9 +86,9 @@ const toDetail = (item) => {
         <div class="divider divider-horizontal"></div>
 
         <div>
-          <div class="text-lg mb-2">中国5G发展现状与未来趋势</div>
+          <div class="text-lg mb-2">{{ t.attributes.Title }}</div>
           <div class="text-xs">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos voluptate quae saepe quod in voluptatem itaque porro neque cupiditate eius, reiciendis inventore maxime quam. Modi molestiae placeat ipsum iste eligendi.
+            {{ t.attributes.Description }}
           </div>
         </div>
       </router-link>
